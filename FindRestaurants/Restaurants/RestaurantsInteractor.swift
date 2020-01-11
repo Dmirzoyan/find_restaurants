@@ -10,6 +10,7 @@ import UIKit
 
 protocol RestaurantsPresenting {
     func present(_ restaurants: [Restaurant])
+    func present(_ restaurantInfo: Restaurant)
     func presentAlert(with message: String)
 }
 
@@ -18,15 +19,18 @@ final class RestaurantsInteractor: RestaurantsInteracting {
     private let router: RestaurantsInternalRoute
     private let presenter: RestaurantsPresenting
     private let restaurantsApiClient: RestaurantsApiAccessing
+    private let storageManager: StorageManaging
     
     init(
         router: RestaurantsInternalRoute,
         presenter: RestaurantsPresenting,
-        restaurantsApiClient: RestaurantsApiAccessing
+        restaurantsApiClient: RestaurantsApiAccessing,
+        storageManager: StorageManaging
     ) {
         self.router = router
         self.presenter = presenter
         self.restaurantsApiClient = restaurantsApiClient
+        self.storageManager = storageManager
     }
     
     func findRestaurants(for coordinate: Coordinate, radius: Int, limit: Int) {
@@ -44,7 +48,14 @@ final class RestaurantsInteractor: RestaurantsInteracting {
                 return
             }
             
+            strongSelf.storageManager.store(restaurants: restaurants)
             strongSelf.presenter.present(restaurants)
+        }
+    }
+    
+    func viewRestaurantInfo(for coordinate: Coordinate) {
+        if let restaurant = storageManager.restaurant(for: coordinate) {
+            presenter.present(restaurant)
         }
     }
 }

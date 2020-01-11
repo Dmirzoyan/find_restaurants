@@ -10,6 +10,7 @@ import UIKit
 
 protocol RestaurantsDisplaying {
     func display(_ restaurantLocations: [Coordinate])
+    func display(_ viewState: RestaurantInfoViewState)
     func displayAlert(with message: String)
 }
 
@@ -29,5 +30,16 @@ final class RestaurantsPresenter: RestaurantsPresenting {
         display?.display(restaurants.map {
             return Coordinate(latitude: $0.location.lat, longitude: $0.location.lng)
         })
+    }
+    
+    func present(_ restaurantInfo: Restaurant) {
+        display?.display(RestaurantInfoViewState(
+            name: restaurantInfo.name,
+            distance: "\(String(Float(restaurantInfo.location.distance) / 1000))" + " km",
+            address: restaurantInfo.location.address,
+            city: "\(restaurantInfo.location.postalCode)" + "\(restaurantInfo.location.city)",
+            country: restaurantInfo.location.country,
+            contact: restaurantInfo.location.country)
+        )
     }
 }

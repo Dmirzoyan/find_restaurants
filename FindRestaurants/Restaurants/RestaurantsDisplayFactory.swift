@@ -22,7 +22,8 @@ final class RestaurantsDisplayFactory: RestaurantsDisplayProducing {
         let interactor = RestaurantsInteractor(
             router: router,
             presenter: presenter,
-            restaurantsApiClient: FoursquareApiClient()
+            restaurantsApiClient: FoursquareApiClient(),
+            storageManager: StorageManager()
         )
         
         viewController.interactor = interactor
