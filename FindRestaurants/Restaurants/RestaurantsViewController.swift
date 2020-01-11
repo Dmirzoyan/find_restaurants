@@ -135,6 +135,16 @@ extension RestaurantsViewController: GMSMapViewDelegate {
         
         return true
     }
+    
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        if popupViewAnimator.currentState == .preview || popupViewAnimator.currentState == .open {
+            popupViewAnimator.animateTransitionIfNeeded(
+                to: PopupState.closed,
+                isInteractionEnabled: false,
+                duration: Constants.animationDuration
+            )
+        }
+    }
 }
 
 extension RestaurantsViewController: RestaurantsDisplaying {
