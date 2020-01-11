@@ -143,7 +143,16 @@ extension RestaurantsViewController: GMSMapViewDelegate {
                 isInteractionEnabled: false,
                 duration: Constants.animationDuration
             )
+            animateMapPadding(height: 0)
         }
+    }
+    
+    private func animateMapPadding(height: CGFloat) {
+        let animator = UIViewPropertyAnimator.init(duration: Constants.animationDuration, dampingRatio: 1) {
+            self.mapView.padding = UIEdgeInsets(top: 0, left: 0, bottom: height, right: 0)
+            self.view.layoutIfNeeded()
+        }
+        animator.startAnimation()
     }
 }
 
@@ -167,6 +176,7 @@ extension RestaurantsViewController: RestaurantsDisplaying {
             isInteractionEnabled: false,
             duration: Constants.animationDuration
         )
+        animateMapPadding(height: Constants.restaurantInfoViewPreviewHeight)
         restaurantInfoView.set(viewState: viewState)
     }
     
