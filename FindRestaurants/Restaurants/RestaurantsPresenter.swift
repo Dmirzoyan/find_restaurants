@@ -8,7 +8,10 @@
 
 import UIKit
 
-protocol RestaurantsDisplaying {}
+protocol RestaurantsDisplaying {
+    func display(_ restaurantLocations: [Coordinate])
+    func displayAlert(with message: String)
+}
 
 final class RestaurantsPresenter: RestaurantsPresenting {
     
@@ -16,5 +19,15 @@ final class RestaurantsPresenter: RestaurantsPresenting {
     
     init(display: RestaurantsDisplaying) {
         self.display = display
+    }
+    
+    func presentAlert(with message: String) {
+        display?.displayAlert(with: message)
+    }
+    
+    func present(_ restaurants: [Restaurant]) {
+        display?.display(restaurants.map {
+            return Coordinate(latitude: $0.location.lat, longitude: $0.location.lng)
+        })
     }
 }

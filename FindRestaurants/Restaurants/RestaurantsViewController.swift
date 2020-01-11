@@ -9,12 +9,15 @@
 import UIKit
 import GoogleMaps
 
-protocol RestaurantsInteracting {}
+protocol RestaurantsInteracting {
+    func findRestaurants(for coordinate: Coordinate, radius: Int, limit: Int)
+}
 
 final class RestaurantsViewController: UIViewController {
 
     var interactor: RestaurantsInteracting!
     var locationManager: CLLocationManager!
+    private let markerIcon = UIImage(named: "marker")
     
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -69,7 +72,37 @@ extension RestaurantsViewController: CLLocationManagerDelegate {
         )
 
         locationManager.stopUpdatingLocation()
+        
+        interactor.findRestaurants(
+            for: Coordinate(
+                latitude: location.coordinate.latitude,
+                longitude: location.coordinate.longitude
+            ),
+            radius: 4000,
+            limit: 10
+        )
     }
 }
 
-extension RestaurantsViewController: RestaurantsDisplaying {}
+extension RestaurantsViewController: RestaurantsDisplaying {
+    
+    func display(_ restaurantLocations: [Coordinate]) {
+        restaurantLocations.forEach { location in
+            let marker = GMSMarker(
+                position: CLLocationCoordinate2D(
+                    latitude: location.latitude,
+                    longitude: location.longitude
+                )
+            )
+            
+            marker.iconView = UIImageView(image: markerIcon)
+            marker.map = mapView
+        }
+    }
+    
+    func displayAlert(with message: String) {
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+}

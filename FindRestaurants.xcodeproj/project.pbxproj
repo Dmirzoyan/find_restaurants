@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		396B4D1709A51BDBD51C2A56 /* Pods_FindRestaurants.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18210E33E5DF742C8BD4876 /* Pods_FindRestaurants.framework */; };
 		ACB7D53523C9BF1A009DF29A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D53423C9BF1A009DF29A /* AppDelegate.swift */; };
-		ACB7D53923C9BF1A009DF29A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D53823C9BF1A009DF29A /* ViewController.swift */; };
 		ACB7D53E23C9BF1F009DF29A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACB7D53D23C9BF1F009DF29A /* Assets.xcassets */; };
 		ACB7D54123C9BF1F009DF29A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACB7D53F23C9BF1F009DF29A /* LaunchScreen.storyboard */; };
 		ACB7D55023C9C60B009DF29A /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D54923C9C60B009DF29A /* RestaurantsViewController.swift */; };
@@ -20,13 +19,16 @@
 		ACB7D55523C9C60B009DF29A /* RestaurantsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D54E23C9C60B009DF29A /* RestaurantsPresenter.swift */; };
 		ACB7D55623C9C60B009DF29A /* RestaurantsDisplayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D54F23C9C60B009DF29A /* RestaurantsDisplayFactory.swift */; };
 		ACB7D55823C9CBAC009DF29A /* MapStyle.geojson in Resources */ = {isa = PBXBuildFile; fileRef = ACB7D55723C9CBAC009DF29A /* MapStyle.geojson */; };
+		ACB7D55B23C9E9D1009DF29A /* FoursquareApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D55A23C9E9D1009DF29A /* FoursquareApiClient.swift */; };
+		ACB7D55E23C9F60A009DF29A /* SearchVenuesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D55D23C9F60A009DF29A /* SearchVenuesResponse.swift */; };
+		ACB7D56323C9FC7E009DF29A /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D56223C9FC7E009DF29A /* Coordinate.swift */; };
+		ACB7D56523CA0F84009DF29A /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D56423CA0F84009DF29A /* Restaurant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A57FE6656564A55FF8E974E6 /* Pods-FindRestaurants.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindRestaurants.release.xcconfig"; path = "Target Support Files/Pods-FindRestaurants/Pods-FindRestaurants.release.xcconfig"; sourceTree = "<group>"; };
 		ACB7D53123C9BF1A009DF29A /* FindRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACB7D53423C9BF1A009DF29A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ACB7D53823C9BF1A009DF29A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ACB7D53D23C9BF1F009DF29A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ACB7D54023C9BF1F009DF29A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ACB7D54223C9BF1F009DF29A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -38,6 +40,10 @@
 		ACB7D54E23C9C60B009DF29A /* RestaurantsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsPresenter.swift; sourceTree = "<group>"; };
 		ACB7D54F23C9C60B009DF29A /* RestaurantsDisplayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsDisplayFactory.swift; sourceTree = "<group>"; };
 		ACB7D55723C9CBAC009DF29A /* MapStyle.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MapStyle.geojson; sourceTree = "<group>"; };
+		ACB7D55A23C9E9D1009DF29A /* FoursquareApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoursquareApiClient.swift; sourceTree = "<group>"; };
+		ACB7D55D23C9F60A009DF29A /* SearchVenuesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVenuesResponse.swift; sourceTree = "<group>"; };
+		ACB7D56223C9FC7E009DF29A /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		ACB7D56423CA0F84009DF29A /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		BF20EDF742A040286870131F /* Pods-FindRestaurants.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindRestaurants.debug.xcconfig"; path = "Target Support Files/Pods-FindRestaurants/Pods-FindRestaurants.debug.xcconfig"; sourceTree = "<group>"; };
 		E18210E33E5DF742C8BD4876 /* Pods_FindRestaurants.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindRestaurants.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -84,9 +90,9 @@
 		ACB7D53323C9BF1A009DF29A /* FindRestaurants */ = {
 			isa = PBXGroup;
 			children = (
+				ACB7D55923C9E999009DF29A /* FoursquareApi */,
 				ACB7D54823C9C51C009DF29A /* Restaurants */,
 				ACB7D53423C9BF1A009DF29A /* AppDelegate.swift */,
-				ACB7D53823C9BF1A009DF29A /* ViewController.swift */,
 				ACB7D53D23C9BF1F009DF29A /* Assets.xcassets */,
 				ACB7D53F23C9BF1F009DF29A /* LaunchScreen.storyboard */,
 				ACB7D54223C9BF1F009DF29A /* Info.plist */,
@@ -97,6 +103,7 @@
 		ACB7D54823C9C51C009DF29A /* Restaurants */ = {
 			isa = PBXGroup;
 			children = (
+				ACB7D56123C9FC6E009DF29A /* Types */,
 				ACB7D54923C9C60B009DF29A /* RestaurantsViewController.swift */,
 				ACB7D54A23C9C60B009DF29A /* RestaurantsViewController.xib */,
 				ACB7D54B23C9C60B009DF29A /* RestaurantsRouterFactory.swift */,
@@ -107,6 +114,32 @@
 				ACB7D55723C9CBAC009DF29A /* MapStyle.geojson */,
 			);
 			path = Restaurants;
+			sourceTree = "<group>";
+		};
+		ACB7D55923C9E999009DF29A /* FoursquareApi */ = {
+			isa = PBXGroup;
+			children = (
+				ACB7D55C23C9F5EF009DF29A /* Respons */,
+				ACB7D56423CA0F84009DF29A /* Restaurant.swift */,
+				ACB7D55A23C9E9D1009DF29A /* FoursquareApiClient.swift */,
+			);
+			path = FoursquareApi;
+			sourceTree = "<group>";
+		};
+		ACB7D55C23C9F5EF009DF29A /* Respons */ = {
+			isa = PBXGroup;
+			children = (
+				ACB7D55D23C9F60A009DF29A /* SearchVenuesResponse.swift */,
+			);
+			path = Respons;
+			sourceTree = "<group>";
+		};
+		ACB7D56123C9FC6E009DF29A /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				ACB7D56223C9FC7E009DF29A /* Coordinate.swift */,
+			);
+			path = Types;
 			sourceTree = "<group>";
 		};
 		DD15C2E73EAE67C33A4B8B85 /* Frameworks */ = {
@@ -233,9 +266,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACB7D53923C9BF1A009DF29A /* ViewController.swift in Sources */,
+				ACB7D56523CA0F84009DF29A /* Restaurant.swift in Sources */,
+				ACB7D55E23C9F60A009DF29A /* SearchVenuesResponse.swift in Sources */,
 				ACB7D55523C9C60B009DF29A /* RestaurantsPresenter.swift in Sources */,
 				ACB7D55323C9C60B009DF29A /* RestaurantsInteractor.swift in Sources */,
+				ACB7D55B23C9E9D1009DF29A /* FoursquareApiClient.swift in Sources */,
+				ACB7D56323C9FC7E009DF29A /* Coordinate.swift in Sources */,
 				ACB7D55023C9C60B009DF29A /* RestaurantsViewController.swift in Sources */,
 				ACB7D53523C9BF1A009DF29A /* AppDelegate.swift in Sources */,
 				ACB7D55223C9C60B009DF29A /* RestaurantsRouterFactory.swift in Sources */,
