@@ -27,6 +27,7 @@ final class RestaurantsViewController: UIViewController {
         static let initialZoom: Float = 13
         static let restaurantInfoViewHeight: CGFloat = 500
         static let restaurantInfoViewPreviewHeight: CGFloat = 110
+        static let popupMargin: CGFloat = 5
         static let animationDuration = 0.8
     }
     
@@ -65,10 +66,10 @@ final class RestaurantsViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             restaurantInfoView.leadingAnchor.constraint(
-                equalTo: view.leadingAnchor, constant: RestaurantInfoView.borderMargin
+                equalTo: view.leadingAnchor, constant: Constants.popupMargin
             ),
             restaurantInfoView.trailingAnchor.constraint(
-                equalTo: view.trailingAnchor, constant: -RestaurantInfoView.borderMargin
+                equalTo: view.trailingAnchor, constant: -Constants.popupMargin
             ),
             restaurantInfoView.heightAnchor.constraint(
                 equalToConstant: Constants.restaurantInfoViewHeight

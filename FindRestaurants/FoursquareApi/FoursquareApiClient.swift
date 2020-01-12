@@ -76,7 +76,7 @@ final class FoursquareApiClient: RestaurantsApiAccessing {
 
             OperationQueue.main.addOperation({
                 completion(response.response.venues.map({
-                        Restaurant(id: $0.id, name: $0.name, location: $0.location, contact: $0.contact)
+                        Restaurant(id: $0.id, name: $0.name, location: $0.location)
                     }), nil)
             })
         }
@@ -102,7 +102,10 @@ final class FoursquareApiClient: RestaurantsApiAccessing {
 
             OperationQueue.main.addOperation({
                 if let group = venue.photos?.groups.first {
-                    completion(RestaurantDetails(url: venue.url, photos: group.items.map({
+                    completion(RestaurantDetails(
+                        url: venue.url,
+                        phone: venue.contact?.formattedPhone,
+                        photos: group.items.map({
                             RestaurantPhotoInfo(
                                 prefix: $0.prefix,
                                 suffix: $0.suffix,
@@ -111,7 +114,11 @@ final class FoursquareApiClient: RestaurantsApiAccessing {
                         )
                     })), nil)
                 } else {
-                    completion(RestaurantDetails(url: venue.url, photos: []), nil)
+                    completion(RestaurantDetails(
+                        url: venue.url,
+                        phone: venue.contact?.formattedPhone,
+                        photos: []), nil
+                    )
                 }
             })
         }

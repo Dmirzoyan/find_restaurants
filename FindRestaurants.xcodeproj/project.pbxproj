@@ -189,8 +189,8 @@
 		ACB7D57123CA3E34009DF29A /* Restaurant Info */ = {
 			isa = PBXGroup;
 			children = (
-				ACB7D57223CA3E70009DF29A /* RestaurantInfoView.swift */,
 				ACB7D57923CA3FFB009DF29A /* RestaurantInfoViewState.swift */,
+				ACB7D57223CA3E70009DF29A /* RestaurantInfoView.swift */,
 			);
 			path = "Restaurant Info";
 			sourceTree = "<group>";

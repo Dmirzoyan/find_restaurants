@@ -12,7 +12,11 @@ extension UIColor {
     
     struct AppTheme {
         static var dargGray: UIColor {
-            return UIColor(displayP3Red: 38 / 255, green: 38 / 255, blue: 38 / 255, alpha: 1)
+            return UIColor(displayP3Red: 38 / 255, green: 38 / 255, blue: 38 / 255, alpha: 0.98)
+        }
+        
+        static var lightBlue: UIColor {
+            return UIColor(displayP3Red: 3 / 255, green: 148 / 255, blue: 252 / 255, alpha: 0.98)
         }
     }
 }

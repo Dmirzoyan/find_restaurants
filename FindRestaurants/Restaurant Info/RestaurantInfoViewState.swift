@@ -6,11 +6,15 @@
 //  Copyright © 2020 Personal. All rights reserved.
 //
 
+import UIKit
+
 struct RestaurantInfoViewState {
     let name: String
     let distance: String
-    let address: String
+    let street: String
     let city: String
     let country: String
-    let contact: String?
+    let phone: String?
+    let image: UIImage?
+    let url: String?
 }

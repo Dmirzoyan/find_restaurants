@@ -27,25 +27,37 @@ final class RestaurantsPresenter: RestaurantsPresenting {
     }
     
     func present(_ restaurants: [Restaurant]) {
-        display?.display(restaurants.map {
-            return Coordinate(latitude: $0.location.lat, longitude: $0.location.lng)
+        display?.display(
+            restaurants.map {
+                return Coordinate(latitude: $0.location.lat, longitude: $0.location.lng)
         })
     }
     
-    func present(_ restaurantInfo: Restaurant) {
-        display?.display(RestaurantInfoViewState(
-            name: restaurantInfo.name,
-            distance: {
-                guard let distance = restaurantInfo.location.distance
-                else {
-                    return ""
-                }
-                return "\(String(Float(distance) / 1000))" + " km"
-        }(),
-            address: restaurantInfo.location.address,
-            city: "\(restaurantInfo.location.postalCode ?? "")" + "\(restaurantInfo.location.city)",
-            country: restaurantInfo.location.country,
-            contact: restaurantInfo.location.country)
+    func present(_ restaurantInfo: Restaurant) {        
+        display?.display(
+            RestaurantInfoViewState(
+                name: restaurantInfo.name,
+                distance: {
+                    guard let distance = restaurantInfo.location.distance
+                    else {
+                        return ""
+                    }
+                    return "\(String(Float(distance) / 1000))" + " km"
+                }(),
+                street: restaurantInfo.location.address,
+                city: "\(restaurantInfo.location.postalCode ?? "")" + "\(restaurantInfo.location.city)",
+                country: restaurantInfo.location.country,
+                phone: restaurantInfo.details?.phone,
+                image: {
+                    guard
+                        let url = restaurantInfo.details?.photos.first?.imageUrl(),
+                        let imageData = try? Data(contentsOf: url as URL)
+                    else { return nil }
+                        
+                    return UIImage(data: imageData)
+                }(),
+                url: restaurantInfo.details?.url
+            )
         )
     }
 }

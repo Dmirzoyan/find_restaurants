@@ -13,14 +13,12 @@ final class Restaurant {
     let id: String
     let name: String
     let location: Location
-    let contact: Contact?
     var details: RestaurantDetails?
     
-    init(id: String, name: String, location: Location, contact: Contact?, details: RestaurantDetails? = nil) {
+    init(id: String, name: String, location: Location, details: RestaurantDetails? = nil) {
         self.id = id
         self.name = name
         self.location = location
-        self.contact = contact
         self.details = details
     }
 }
@@ -28,11 +26,13 @@ final class Restaurant {
 final class RestaurantDetails {
     
     let url: String?
+    let phone: String?
     let photos: [RestaurantPhotoInfo]
     
-    init(url: String?, photos: [RestaurantPhotoInfo]) {
+    init(url: String?, phone: String?, photos: [RestaurantPhotoInfo]) {
         self.url = url
         self.photos = photos
+        self.phone = phone
     }
     
 }
@@ -50,8 +50,8 @@ final class RestaurantPhotoInfo {
         self.height = height
     }
     
-    func imageUrl(for maxImgWidth: Int = 300) -> URL? {
+    func imageUrl(for maxImgWidth: Int = 700) -> URL? {
         let size = width > maxImgWidth ? maxImgWidth : width
-        return URL(string: "\(prefix)\(size)x\(size)\(suffix)")
+        return URL(string: "\(prefix)\(size)x\(size / 2)\(suffix)")
     }
 }
