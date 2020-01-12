@@ -8,10 +8,10 @@
 
 import Foundation
 
-
 protocol StorageManaging {
     func store(restaurants: [Restaurant])
     func restaurant(for coordinate: Coordinate) -> Restaurant?
+    func addRestaurantDetails(restaurantId: String, details: RestaurantDetails)
 }
 
 final class StorageManager: StorageManaging {
@@ -26,5 +26,11 @@ final class StorageManager: StorageManaging {
         return restaurants.first(
             where: { $0.location.lat == coordinate.latitude && $0.location.lng == coordinate.longitude }
         )
+    }
+    
+    func addRestaurantDetails(restaurantId: String, details: RestaurantDetails) {
+        if let restaurant = restaurants.first(where: { $0.id == restaurantId }) {
+            restaurant.details = details
+        }
     }
 }

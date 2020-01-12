@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		396B4D1709A51BDBD51C2A56 /* Pods_FindRestaurants.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18210E33E5DF742C8BD4876 /* Pods_FindRestaurants.framework */; };
+		AC7F8EF923CB240C005A2A80 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7F8EF823CB240C005A2A80 /* Restaurant.swift */; };
+		AC7F8EFB23CB4235005A2A80 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7F8EFA23CB4235005A2A80 /* Meta.swift */; };
 		ACB7D53523C9BF1A009DF29A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D53423C9BF1A009DF29A /* AppDelegate.swift */; };
 		ACB7D53E23C9BF1F009DF29A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACB7D53D23C9BF1F009DF29A /* Assets.xcassets */; };
 		ACB7D54123C9BF1F009DF29A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACB7D53F23C9BF1F009DF29A /* LaunchScreen.storyboard */; };
@@ -22,7 +24,7 @@
 		ACB7D55B23C9E9D1009DF29A /* FoursquareApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D55A23C9E9D1009DF29A /* FoursquareApiClient.swift */; };
 		ACB7D55E23C9F60A009DF29A /* SearchVenuesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D55D23C9F60A009DF29A /* SearchVenuesResponse.swift */; };
 		ACB7D56323C9FC7E009DF29A /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D56223C9FC7E009DF29A /* Coordinate.swift */; };
-		ACB7D56523CA0F84009DF29A /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D56423CA0F84009DF29A /* Restaurant.swift */; };
+		ACB7D56523CA0F84009DF29A /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D56423CA0F84009DF29A /* Venue.swift */; };
 		ACB7D56B23CA3A29009DF29A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D56A23CA3A29009DF29A /* StorageManager.swift */; };
 		ACB7D56E23CA3DCB009DF29A /* PopupState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D56D23CA3DCB009DF29A /* PopupState.swift */; };
 		ACB7D57023CA3DD6009DF29A /* PopupViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D56F23CA3DD6009DF29A /* PopupViewAnimator.swift */; };
@@ -30,10 +32,13 @@
 		ACB7D57623CA3F53009DF29A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D57523CA3F53009DF29A /* AppTheme.swift */; };
 		ACB7D57823CA3F6B009DF29A /* TextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D57723CA3F6B009DF29A /* TextAttributes.swift */; };
 		ACB7D57A23CA3FFB009DF29A /* RestaurantInfoViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D57923CA3FFB009DF29A /* RestaurantInfoViewState.swift */; };
+		ACB7D57C23CA881E009DF29A /* GetVenueDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D57B23CA881E009DF29A /* GetVenueDetailsResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A57FE6656564A55FF8E974E6 /* Pods-FindRestaurants.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindRestaurants.release.xcconfig"; path = "Target Support Files/Pods-FindRestaurants/Pods-FindRestaurants.release.xcconfig"; sourceTree = "<group>"; };
+		AC7F8EF823CB240C005A2A80 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		AC7F8EFA23CB4235005A2A80 /* Meta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
 		ACB7D53123C9BF1A009DF29A /* FindRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACB7D53423C9BF1A009DF29A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACB7D53D23C9BF1F009DF29A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -50,7 +55,7 @@
 		ACB7D55A23C9E9D1009DF29A /* FoursquareApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoursquareApiClient.swift; sourceTree = "<group>"; };
 		ACB7D55D23C9F60A009DF29A /* SearchVenuesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVenuesResponse.swift; sourceTree = "<group>"; };
 		ACB7D56223C9FC7E009DF29A /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
-		ACB7D56423CA0F84009DF29A /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		ACB7D56423CA0F84009DF29A /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		ACB7D56A23CA3A29009DF29A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		ACB7D56D23CA3DCB009DF29A /* PopupState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupState.swift; sourceTree = "<group>"; };
 		ACB7D56F23CA3DD6009DF29A /* PopupViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewAnimator.swift; sourceTree = "<group>"; };
@@ -58,6 +63,7 @@
 		ACB7D57523CA3F53009DF29A /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		ACB7D57723CA3F6B009DF29A /* TextAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttributes.swift; sourceTree = "<group>"; };
 		ACB7D57923CA3FFB009DF29A /* RestaurantInfoViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoViewState.swift; sourceTree = "<group>"; };
+		ACB7D57B23CA881E009DF29A /* GetVenueDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVenueDetailsResponse.swift; sourceTree = "<group>"; };
 		BF20EDF742A040286870131F /* Pods-FindRestaurants.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindRestaurants.debug.xcconfig"; path = "Target Support Files/Pods-FindRestaurants/Pods-FindRestaurants.debug.xcconfig"; sourceTree = "<group>"; };
 		E18210E33E5DF742C8BD4876 /* Pods_FindRestaurants.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindRestaurants.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -138,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				ACB7D55C23C9F5EF009DF29A /* Respons */,
-				ACB7D56423CA0F84009DF29A /* Restaurant.swift */,
+				AC7F8EF823CB240C005A2A80 /* Restaurant.swift */,
 				ACB7D55A23C9E9D1009DF29A /* FoursquareApiClient.swift */,
 			);
 			path = FoursquareApi;
@@ -148,6 +154,9 @@
 			isa = PBXGroup;
 			children = (
 				ACB7D55D23C9F60A009DF29A /* SearchVenuesResponse.swift */,
+				ACB7D57B23CA881E009DF29A /* GetVenueDetailsResponse.swift */,
+				AC7F8EFA23CB4235005A2A80 /* Meta.swift */,
+				ACB7D56423CA0F84009DF29A /* Venue.swift */,
 			);
 			path = Respons;
 			sourceTree = "<group>";
@@ -319,9 +328,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC7F8EF923CB240C005A2A80 /* Restaurant.swift in Sources */,
+				ACB7D57C23CA881E009DF29A /* GetVenueDetailsResponse.swift in Sources */,
 				ACB7D57623CA3F53009DF29A /* AppTheme.swift in Sources */,
 				ACB7D56E23CA3DCB009DF29A /* PopupState.swift in Sources */,
-				ACB7D56523CA0F84009DF29A /* Restaurant.swift in Sources */,
+				ACB7D56523CA0F84009DF29A /* Venue.swift in Sources */,
+				AC7F8EFB23CB4235005A2A80 /* Meta.swift in Sources */,
 				ACB7D55E23C9F60A009DF29A /* SearchVenuesResponse.swift in Sources */,
 				ACB7D55523C9C60B009DF29A /* RestaurantsPresenter.swift in Sources */,
 				ACB7D57823CA3F6B009DF29A /* TextAttributes.swift in Sources */,

@@ -8,14 +8,9 @@
 
 struct SearchVenuesResponse: Codable {
     let meta: Meta
-    let response: Response
+    let response: VenuesResponse
 }
 
-struct Meta: Codable {
-    let code: Int
-    let errorDetail: String?
-}
-
-struct Response: Codable {
-    let venues: [Restaurant]?
+struct VenuesResponse: Codable {
+    let venues: [Venue]
 }

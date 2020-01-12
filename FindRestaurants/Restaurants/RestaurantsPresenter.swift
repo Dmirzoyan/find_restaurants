@@ -35,9 +35,15 @@ final class RestaurantsPresenter: RestaurantsPresenting {
     func present(_ restaurantInfo: Restaurant) {
         display?.display(RestaurantInfoViewState(
             name: restaurantInfo.name,
-            distance: "\(String(Float(restaurantInfo.location.distance) / 1000))" + " km",
+            distance: {
+                guard let distance = restaurantInfo.location.distance
+                else {
+                    return ""
+                }
+                return "\(String(Float(distance) / 1000))" + " km"
+        }(),
             address: restaurantInfo.location.address,
-            city: "\(restaurantInfo.location.postalCode)" + "\(restaurantInfo.location.city)",
+            city: "\(restaurantInfo.location.postalCode ?? "")" + "\(restaurantInfo.location.city)",
             country: restaurantInfo.location.country,
             contact: restaurantInfo.location.country)
         )

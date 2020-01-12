@@ -9,6 +9,7 @@
 import Foundation
 
 typealias FindRestaurantsCompletion = ([Restaurant], Error?) -> Void
+typealias GetRestaurantDetailsCompletion = (RestaurantDetails?, Error?) -> Void
 
 protocol RestaurantsApiAccessing {
     func findRestaurants(
@@ -18,9 +19,11 @@ protocol RestaurantsApiAccessing {
         limit: Int,
         completion: @escaping FindRestaurantsCompletion
     )
+    
+    func getRestaurantDetails(restaurantId: String, completion: @escaping GetRestaurantDetailsCompletion)
 }
 
-class FoursquareApiClient: RestaurantsApiAccessing {
+final class FoursquareApiClient: RestaurantsApiAccessing {
     
     private static let clientId = "CLIENT_ID_PLACEHOLDER"
     private static let clientSecret = "CLIENT_SECRET_PLACEHOLDER"
@@ -30,11 +33,15 @@ class FoursquareApiClient: RestaurantsApiAccessing {
         static let base = "https://api.foursquare.com/v2/"
         
         case search(String, String, Int, Int)
+        case venueInfo(String)
         
         var urlString: String {
             switch self {
             case .search(let latitude, let longitude, let radius, let limit):
                 return Endpoints.base + "venues/search?ll=\(latitude),\(longitude)" + "&categoryId=\(foodCategoryId)&limit=\(limit)" + "&radius=\(radius)" + "&client_id=\(clientId)&client_secret=\(clientSecret)&v=20200115"
+            case .venueInfo(let id):
+                return Endpoints.base + "venues/\(id)" +
+                    "?client_id=\(clientId)&client_secret=\(clientSecret)&v=20200115"
             }
         }
         
@@ -54,51 +61,88 @@ class FoursquareApiClient: RestaurantsApiAccessing {
         let longitudeStr = String(format:"%f", longitude)
         let request = URLRequest(url: Endpoints.search(latitudeStr, longitudeStr, radius, limit).url)
         
-        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            guard
-                let _ = response as? HTTPURLResponse,
-                let data = data,
-                error == nil
+        networkRequestTask(request: request, response: SearchVenuesResponse.self) { [weak self] (response, error) in
+            guard let response = response
             else {
-                self?.reportError("Unknown API response", completion: completion)
+                OperationQueue.main.addOperation({ completion([], error) })
+                return
+            }
+            
+            guard response.meta.code == 200
+            else {
+                OperationQueue.main.addOperation({ completion([], self?.error(with: "Unexpected API response")) })
                 return
             }
 
-            do {
-                let responseObject = try JSONDecoder().decode(SearchVenuesResponse.self, from: data)
-                
-                guard
-                    let venues = responseObject.response.venues,
-                    responseObject.meta.code == 200
-                else {
-                    self?.reportError(
-                        responseObject.meta.errorDetail ?? "Unknown API response",
-                        completion: completion
-                    )
-                    return
-                }
-                
-                OperationQueue.main.addOperation({
-                    completion(venues, nil)
-                })
-                
-            } catch {
-                self?.reportError("Unknown API response", completion: completion)
-            }
+            OperationQueue.main.addOperation({
+                completion(response.response.venues.map({
+                        Restaurant(id: $0.id, name: $0.name, location: $0.location, contact: $0.contact)
+                    }), nil)
+            })
         }
-        task.resume()
-            
     }
     
-    private func reportError(_ message: String, completion: @escaping FindRestaurantsCompletion) {
-        let apiError = NSError(
-            domain: "VenuesSearch",
-            code: 0,
-            userInfo: [NSLocalizedFailureReasonErrorKey: message]
-        )
+    func getRestaurantDetails(restaurantId: String, completion: @escaping GetRestaurantDetailsCompletion) {
+        let request = URLRequest(url: Endpoints.venueInfo(restaurantId).url)
         
-        OperationQueue.main.addOperation({
-            completion([], apiError)
-        })
+        networkRequestTask(request: request, response: GetVenueDetailsResponse.self) { [weak self] (response, error) in
+            guard let response = response
+            else {
+                OperationQueue.main.addOperation({ completion(nil, error) })
+                return
+            }
+            
+            guard
+                let venue = response.response.venue,
+                response.meta.code == 200
+            else {
+                OperationQueue.main.addOperation({ completion(nil, self?.error(with: "Unexpected API response")) })
+                return
+            }
+
+            OperationQueue.main.addOperation({
+                if let group = venue.photos?.groups.first {
+                    completion(RestaurantDetails(url: venue.url, photos: group.items.map({
+                            RestaurantPhotoInfo(
+                                prefix: $0.prefix,
+                                suffix: $0.suffix,
+                                width: $0.width,
+                                height: $0.height
+                        )
+                    })), nil)
+                } else {
+                    completion(RestaurantDetails(url: venue.url, photos: []), nil)
+                }
+            })
+        }
+    }
+    
+    private func networkRequestTask<ResponseType: Decodable>(
+         request: URLRequest,
+         response: ResponseType.Type,
+         completion: @escaping (ResponseType?, Error?) -> Void
+     ) {
+         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+             guard
+                let _ = response as? HTTPURLResponse,
+                let data = data,
+                error == nil
+             else {
+                completion(nil, error)
+                return
+             }
+             
+             do {
+                let responseObject = try JSONDecoder().decode(ResponseType.self, from: data)
+                completion(responseObject, nil)
+             } catch {
+                completion(nil, self?.error(with: "Failed to decode response message"))
+             }
+         }
+         task.resume()
+     }
+    
+    private func error(with message: String) -> Error {
+        return NSError(domain: "FoursquareApi", code: 0, userInfo: [NSLocalizedFailureReasonErrorKey: message])
     }
 }

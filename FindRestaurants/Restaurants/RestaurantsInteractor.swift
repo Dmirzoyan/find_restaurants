@@ -55,7 +55,28 @@ final class RestaurantsInteractor: RestaurantsInteracting {
     
     func viewRestaurantInfo(for coordinate: Coordinate) {
         if let restaurant = storageManager.restaurant(for: coordinate) {
-            presenter.present(restaurant)
+            
+            if let _ = restaurant.details {
+                presenter.present(restaurant)
+            } else {
+                restaurantsApiClient.getRestaurantDetails(restaurantId: restaurant.id) {
+                    [weak self] (restaurantDetails, error) in
+                    guard
+                        error == nil,
+                        let restaurantDetails = restaurantDetails,
+                        let strongSelf = self
+                    else {
+                        self?.presenter.presentAlert(with: "Could not retrieve restaurant info")
+                        return
+                    }
+                    
+                    strongSelf.storageManager.addRestaurantDetails(
+                        restaurantId: restaurant.id,
+                        details: restaurantDetails
+                    )
+                    strongSelf.presenter.present(restaurant)
+                }
+            }
         }
     }
 }
