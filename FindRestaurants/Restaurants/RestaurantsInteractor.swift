@@ -20,25 +20,31 @@ final class RestaurantsInteractor: RestaurantsInteracting {
     private let presenter: RestaurantsPresenting
     private let restaurantsApiClient: RestaurantsApiAccessing
     private let storageManager: StorageManaging
+    private let restaurantsLimitQuery: RestaurantsLimitQuerying
+    private let restaurantsQuery: RestaurantsQuerying
     
     init(
         router: RestaurantsInternalRoute,
         presenter: RestaurantsPresenting,
         restaurantsApiClient: RestaurantsApiAccessing,
-        storageManager: StorageManaging
+        storageManager: StorageManaging,
+        restaurantsLimitQuery: RestaurantsLimitQuerying,
+        restaurantsQuery: RestaurantsQuerying
     ) {
         self.router = router
         self.presenter = presenter
         self.restaurantsApiClient = restaurantsApiClient
         self.storageManager = storageManager
+        self.restaurantsLimitQuery = restaurantsLimitQuery
+        self.restaurantsQuery = restaurantsQuery
     }
     
-    func findRestaurants(for coordinate: Coordinate, radius: Int, limit: Int) {
+    func findRestaurants(for coordinate: Coordinate, zoom: Float) {
         restaurantsApiClient.findRestaurants(
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
-            radius: radius,
-            limit: limit
+            radius: 4000,
+            limit: restaurantsLimitQuery.limit(for: zoom)
         ) { [weak self] (restaurants, error) in
             guard
                 error == nil,
@@ -48,13 +54,14 @@ final class RestaurantsInteractor: RestaurantsInteracting {
                 return
             }
             
-            strongSelf.storageManager.store(restaurants: restaurants)
-            strongSelf.presenter.present(restaurants)
+            let newRestaurants = strongSelf.restaurantsQuery.newRestaurants(in: restaurants)
+            strongSelf.storageManager.add(restaurants: restaurants)
+            strongSelf.presenter.present(newRestaurants)
         }
     }
     
     func viewRestaurantInfo(for coordinate: Coordinate) {
-        if let restaurant = storageManager.restaurant(for: coordinate) {
+        if let restaurant = restaurantsQuery.restaurant(for: coordinate) {
             
             if let _ = restaurant.details {
                 presenter.present(restaurant)

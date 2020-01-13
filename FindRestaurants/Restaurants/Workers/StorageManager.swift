@@ -9,28 +9,36 @@
 import Foundation
 
 protocol StorageManaging {
-    func store(restaurants: [Restaurant])
-    func restaurant(for coordinate: Coordinate) -> Restaurant?
+    func add(restaurants: [Restaurant])
     func addRestaurantDetails(restaurantId: String, details: RestaurantDetails)
+}
+
+protocol StorageAccessing {    
+    func getRestaurants() -> [Restaurant]
 }
 
 final class StorageManager: StorageManaging {
 
     private var restaurants: [Restaurant] = []
     
-    func store(restaurants: [Restaurant]) {
-        self.restaurants = restaurants
-    }
-    
-    func restaurant(for coordinate: Coordinate) -> Restaurant? {
-        return restaurants.first(
-            where: { $0.location.lat == coordinate.latitude && $0.location.lng == coordinate.longitude }
-        )
+    func add(restaurants: [Restaurant]) {
+        restaurants.forEach { (restaurant) in
+            if !(self.restaurants.contains(where: { $0.id == restaurant.id })) {
+                self.restaurants.append(restaurant)
+            }
+        }
     }
     
     func addRestaurantDetails(restaurantId: String, details: RestaurantDetails) {
         if let restaurant = restaurants.first(where: { $0.id == restaurantId }) {
             restaurant.details = details
         }
+    }
+}
+
+extension StorageManager: StorageAccessing {
+    
+    func getRestaurants() -> [Restaurant] {
+        return restaurants
     }
 }

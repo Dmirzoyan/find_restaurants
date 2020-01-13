@@ -18,12 +18,20 @@ final class RestaurantsDisplayFactory: RestaurantsDisplayProducing {
     func make(router: RestaurantsInternalRoute) -> UIViewController {
         let viewController = RestaurantsViewController()
         let presenter = RestaurantsPresenter(display: viewController)
+        let store = StorageManager()
         
         let interactor = RestaurantsInteractor(
             router: router,
             presenter: presenter,
             restaurantsApiClient: FoursquareApiClient(),
-            storageManager: StorageManager()
+            storageManager: store,
+            restaurantsLimitQuery: RestaurantsLimitQuery(
+                minZoom: 13,
+                maxZoom: 16,
+                minLimit: 4,
+                maxLimit: 15
+            ),
+            restaurantsQuery: RestaurantsQuery(store: store)
         )
         
         viewController.interactor = interactor

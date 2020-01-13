@@ -42,7 +42,7 @@ final class RestaurantsPresenter: RestaurantsPresenting {
                     else {
                         return ""
                     }
-                    return "\(String(Float(distance) / 1000))" + " km"
+                    return "Distance - \(String(Float(distance) / 1000))" + " km"
                 }(),
                 street: restaurantInfo.location.address,
                 city: "\(restaurantInfo.location.postalCode ?? "")" + "\(restaurantInfo.location.city)",

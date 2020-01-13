@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 
 protocol RestaurantsInteracting {
-    func findRestaurants(for coordinate: Coordinate, radius: Int, limit: Int)
+    func findRestaurants(for coordinate: Coordinate, zoom: Float)
     func viewRestaurantInfo(for coordinate: Coordinate)
 }
 
@@ -114,15 +114,6 @@ extension RestaurantsViewController: CLLocationManagerDelegate {
         )
 
         locationManager.stopUpdatingLocation()
-        
-        interactor.findRestaurants(
-            for: Coordinate(
-                latitude: location.coordinate.latitude,
-                longitude: location.coordinate.longitude
-            ),
-            radius: 4000,
-            limit: 10
-        )
     }
 }
 
@@ -154,6 +145,19 @@ extension RestaurantsViewController: GMSMapViewDelegate {
             self.view.layoutIfNeeded()
         }
         animator.startAnimation()
+    }
+    
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        guard let coordinate = mapView.myLocation?.coordinate
+        else { return }
+        
+        interactor.findRestaurants(
+            for: Coordinate(
+                latitude:  coordinate.latitude,
+                longitude: coordinate.longitude
+            ),
+            zoom: position.zoom
+        )
     }
 }
 
