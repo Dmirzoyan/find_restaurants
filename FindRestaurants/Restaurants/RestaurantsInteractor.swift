@@ -11,6 +11,7 @@ import UIKit
 protocol RestaurantsPresenting {
     func present(_ restaurants: [Restaurant])
     func present(_ restaurantInfo: Restaurant)
+    func presentOverlay(with opacity: Float)
     func presentAlert(with message: String)
 }
 
@@ -22,6 +23,7 @@ final class RestaurantsInteractor: RestaurantsInteracting {
     private let storageManager: StorageManaging
     private let restaurantsLimitQuery: RestaurantsLimitQuerying
     private let restaurantsQuery: RestaurantsQuerying
+    private let mapOverlayOpacityQuery: MapOverlayOpacityQuerying
     
     init(
         router: RestaurantsInternalRoute,
@@ -29,7 +31,8 @@ final class RestaurantsInteractor: RestaurantsInteracting {
         restaurantsApiClient: RestaurantsApiAccessing,
         storageManager: StorageManaging,
         restaurantsLimitQuery: RestaurantsLimitQuerying,
-        restaurantsQuery: RestaurantsQuerying
+        restaurantsQuery: RestaurantsQuerying,
+        mapOverlayOpacityQuery: MapOverlayOpacityQuerying
     ) {
         self.router = router
         self.presenter = presenter
@@ -37,6 +40,7 @@ final class RestaurantsInteractor: RestaurantsInteracting {
         self.storageManager = storageManager
         self.restaurantsLimitQuery = restaurantsLimitQuery
         self.restaurantsQuery = restaurantsQuery
+        self.mapOverlayOpacityQuery = mapOverlayOpacityQuery
     }
     
     func findRestaurants(for coordinate: Coordinate, zoom: Float) {
@@ -85,5 +89,9 @@ final class RestaurantsInteractor: RestaurantsInteracting {
                 }
             }
         }
+    }
+    
+    func setMapOverlay(for zoom: Float) {
+        presenter.presentOverlay(with: mapOverlayOpacityQuery.opacity(for: zoom))
     }
 }

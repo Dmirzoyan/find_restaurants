@@ -11,6 +11,7 @@ import UIKit
 protocol RestaurantsDisplaying {
     func display(_ restaurantLocations: [Coordinate])
     func display(_ viewState: RestaurantInfoViewState)
+    func displayOverlay(with opacity: CGFloat)
     func displayAlert(with message: String)
 }
 
@@ -59,5 +60,9 @@ final class RestaurantsPresenter: RestaurantsPresenting {
                 url: restaurantInfo.details?.url
             )
         )
+    }
+    
+    func presentOverlay(with opacity: Float) {
+        display?.displayOverlay(with: CGFloat(opacity))
     }
 }

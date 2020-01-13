@@ -12,6 +12,7 @@ import GoogleMaps
 protocol RestaurantsInteracting {
     func findRestaurants(for coordinate: Coordinate, zoom: Float)
     func viewRestaurantInfo(for coordinate: Coordinate)
+    func setMapOverlay(for zoom: Float)
 }
 
 final class RestaurantsViewController: UIViewController {
@@ -20,6 +21,7 @@ final class RestaurantsViewController: UIViewController {
     var locationManager: CLLocationManager!
     var restaurantInfoView: RestaurantInfoView!
     var popupViewAnimator: PopupViewAnimating!
+    private var mapOverlay: GMSCircle?
     
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -150,7 +152,8 @@ extension RestaurantsViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         guard let coordinate = mapView.myLocation?.coordinate
         else { return }
-        
+            
+        interactor.setMapOverlay(for: position.zoom)        
         interactor.findRestaurants(
             for: Coordinate(
                 latitude:  coordinate.latitude,
@@ -183,6 +186,13 @@ extension RestaurantsViewController: RestaurantsDisplaying {
         )
         animateMapPadding(height: Constants.restaurantInfoViewPreviewHeight)
         restaurantInfoView.set(viewState: viewState)
+    }
+    
+    func displayOverlay(with opacity: CGFloat) {
+        mapOverlay?.map = nil
+        mapOverlay = GMSCircle(position: mapView.camera.target, radius: 2000000)
+        mapOverlay?.fillColor = UIColor(red: 177/256, green: 202/256, blue: 242/256, alpha: opacity)
+        mapOverlay?.map = mapView
     }
     
     func displayAlert(with message: String) {

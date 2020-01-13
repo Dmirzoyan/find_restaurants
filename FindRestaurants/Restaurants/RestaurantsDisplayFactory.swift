@@ -31,7 +31,8 @@ final class RestaurantsDisplayFactory: RestaurantsDisplayProducing {
                 minLimit: 4,
                 maxLimit: 15
             ),
-            restaurantsQuery: RestaurantsQuery(store: store)
+            restaurantsQuery: RestaurantsQuery(store: store),
+            mapOverlayOpacityQuery: MapOverlayOpacityQuery(maxOpacity: 0.65, minZoom: 13)
         )
         
         viewController.interactor = interactor
