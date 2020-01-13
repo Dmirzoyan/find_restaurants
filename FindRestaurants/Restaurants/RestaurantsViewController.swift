@@ -21,7 +21,7 @@ final class RestaurantsViewController: UIViewController {
     var locationManager: CLLocationManager!
     var restaurantInfoView: RestaurantInfoView!
     var popupViewAnimator: PopupViewAnimating!
-    private var mapOverlay: GMSCircle?
+    private var mapOverlay: GMSCircle?    
     
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -153,7 +153,7 @@ extension RestaurantsViewController: GMSMapViewDelegate {
         guard let coordinate = mapView.myLocation?.coordinate
         else { return }
             
-        interactor.setMapOverlay(for: position.zoom)        
+        interactor.setMapOverlay(for: position.zoom)            
         interactor.findRestaurants(
             for: Coordinate(
                 latitude:  coordinate.latitude,
