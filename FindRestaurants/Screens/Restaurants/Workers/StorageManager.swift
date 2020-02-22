@@ -8,6 +8,7 @@
 
 import Foundation
 
+//sourcery: mock
 protocol StorageManaging {
     func add(restaurants: [Restaurant])
     func addRestaurantDetails(restaurantId: String, details: RestaurantDetails)

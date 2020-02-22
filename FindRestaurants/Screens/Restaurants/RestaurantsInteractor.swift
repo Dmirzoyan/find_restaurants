@@ -8,9 +8,10 @@
 
 import UIKit
 
+//sourcery: mock
 protocol RestaurantsPresenting {
-    func present(_ restaurants: [Restaurant])
-    func present(_ restaurantInfo: Restaurant)
+    func present(restaurants: [Restaurant])
+    func present(restaurantInfo: Restaurant)
     func presentOverlay(with opacity: Float)
     func presentAlert(with message: String)
 }
@@ -48,7 +49,6 @@ final class RestaurantsInteractor: RestaurantsInteracting {
     
     func findRestaurants(for coordinate: Coordinate, zoom: Float) {
         if queryThrottler.shouldPerformNewQuery(for: zoom) == true {
-            print(zoom)
             restaurantsApiClient.findRestaurants(
                 latitude: coordinate.latitude,
                 longitude: coordinate.longitude,
@@ -65,7 +65,7 @@ final class RestaurantsInteractor: RestaurantsInteracting {
                 
                 let newRestaurants = strongSelf.restaurantsQuery.newRestaurants(in: restaurants)
                 strongSelf.storageManager.add(restaurants: restaurants)
-                strongSelf.presenter.present(newRestaurants)
+                strongSelf.presenter.present(restaurants: newRestaurants)
             }
         }
     }
@@ -74,7 +74,7 @@ final class RestaurantsInteractor: RestaurantsInteracting {
         if let restaurant = restaurantsQuery.restaurant(for: coordinate) {
             
             if let _ = restaurant.details {
-                presenter.present(restaurant)
+                presenter.present(restaurantInfo: restaurant)
             } else {
                 restaurantsApiClient.getRestaurantDetails(restaurantId: restaurant.id) {
                     [weak self] (restaurantDetails, error) in
@@ -91,7 +91,7 @@ final class RestaurantsInteractor: RestaurantsInteracting {
                         restaurantId: restaurant.id,
                         details: restaurantDetails
                     )
-                    strongSelf.presenter.present(restaurant)
+                    strongSelf.presenter.present(restaurantInfo: restaurant)
                 }
             }
         }

@@ -6,6 +6,7 @@
 //  Copyright © 2020 Personal. All rights reserved.
 //
 
+//sourcery: mock
 protocol MapOverlayOpacityQuerying {
     func opacity(for zoom: Float) -> Float
 }

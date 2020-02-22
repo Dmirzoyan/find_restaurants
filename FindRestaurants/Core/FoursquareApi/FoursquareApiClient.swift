@@ -11,6 +11,7 @@ import Foundation
 typealias FindRestaurantsCompletion = ([Restaurant], Error?) -> Void
 typealias GetRestaurantDetailsCompletion = (RestaurantDetails?, Error?) -> Void
 
+//sourcery: mock
 protocol RestaurantsApiAccessing {
     func findRestaurants(
         latitude: Double,

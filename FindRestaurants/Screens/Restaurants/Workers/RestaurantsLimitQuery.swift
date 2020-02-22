@@ -6,6 +6,7 @@
 //  Copyright © 2020 Personal. All rights reserved.
 //
 
+//sourcery: mock
 protocol RestaurantsLimitQuerying {
     func limit(for zoom: Float) -> Int
 }

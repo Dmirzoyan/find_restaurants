@@ -12,6 +12,7 @@ protocol RestaurantsRoute {
     func start()
 }
 
+//sourcery: mock
 protocol RestaurantsInternalRoute {}
 
 final class RestaurantsRouter: RestaurantsRoute {

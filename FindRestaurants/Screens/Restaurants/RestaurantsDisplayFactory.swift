@@ -18,7 +18,7 @@ final class RestaurantsDisplayFactory: RestaurantsDisplayProducing {
     func make(router: RestaurantsInternalRoute) -> UIViewController {
         let viewController = RestaurantsViewController()
         let presenter = RestaurantsPresenter(display: viewController)
-        let store = StorageManager()
+        let store = Dependencies.storageManager
         
         let interactor = RestaurantsInteractor(
             router: router,
@@ -32,7 +32,7 @@ final class RestaurantsDisplayFactory: RestaurantsDisplayProducing {
                 maxLimit: 15
             ),
             restaurantsQuery: RestaurantsQuery(store: store),
-            mapOverlayOpacityQuery: MapOverlayOpacityQuery(maxOpacity: 0.65, minZoom: 13),
+            mapOverlayOpacityQuery: MapOverlayOpacityQuery(maxOpacity: 0.25, minZoom: 13),
             queryThrottler: QueryThrottler(minZoom: 12, maxZoom: 16)
         )
         

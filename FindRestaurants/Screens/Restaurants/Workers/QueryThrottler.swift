@@ -6,6 +6,7 @@
 //  Copyright © 2020 Personal. All rights reserved.
 //
 
+//sourcery: mock
 protocol QueryThrottling {
     func shouldPerformNewQuery(for zoom: Float) -> Bool
 }

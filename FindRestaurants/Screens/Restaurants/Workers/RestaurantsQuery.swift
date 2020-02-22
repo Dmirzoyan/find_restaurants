@@ -6,6 +6,7 @@
 //  Copyright © 2020 Personal. All rights reserved.
 //
 
+//sourcery: mock
 protocol RestaurantsQuerying {
     func restaurant(for coordinate: Coordinate) -> Restaurant?
     func newRestaurants(in list: [Restaurant]) -> [Restaurant]

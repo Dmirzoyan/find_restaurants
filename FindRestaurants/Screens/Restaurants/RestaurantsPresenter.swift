@@ -27,14 +27,14 @@ final class RestaurantsPresenter: RestaurantsPresenting {
         display?.displayAlert(with: message)
     }
     
-    func present(_ restaurants: [Restaurant]) {
+    func present(restaurants: [Restaurant]) {
         display?.display(
             restaurants.map {
                 return Coordinate(latitude: $0.location.lat, longitude: $0.location.lng)
         })
     }
     
-    func present(_ restaurantInfo: Restaurant) {        
+    func present(restaurantInfo: Restaurant) {        
         display?.display(
             RestaurantInfoViewState(
                 name: restaurantInfo.name,

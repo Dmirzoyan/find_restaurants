@@ -2,10 +2,15 @@
 # platform :ios, '9.0'
 
 target 'FindRestaurants' do
-  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
-  # Pods for FindRestaurants
+  
   pod 'GoogleMaps'
+
+  target 'FindRestaurantsTests' do
+    inherit! :search_paths
+
+    pod 'Quick'
+    pod 'Nimble'
+  end
 
 end
